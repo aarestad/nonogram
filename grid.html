@@ -1,55 +1,19 @@
 <html>
     <head>
         <title>GRID</title>
-        <style type="text/css">
-            td {
-                width: 50px;
-                height: 50px;
-                background-color: silver;
-                border: 1px solid black;
-            }
-
-            .over {
-                background-color: yellow;
-            }
-
-            .active {
-                background-color: red;
-            }
-        </style>
+        
+        <link rel="stylesheet" type="text/css" href="grid.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="grid.js"></script>
 
         <script type="text/javascript">
-        $(function() {
-            function buildGrid(rows, cols, grid) {
-                for (var i = 0; i < rows; i++) {
-                    var row = $('<tr></tr>');
-
-                    for (var j = 0; j < cols; j++) {
-                        var cell = $('<td></td>').data('row', i).data('col', j)
-                          .mouseover(function() {
-                            $(this).addClass('over');
-                            $('#location').text('row=' + $(this).data('row') + '; col=' + $(this).data('col'));
-                        }).mouseout(function() {
-                            $(this).removeClass('over');
-                            $('#location').text('');
-                        }).click(function() {
-                            $(this).toggleClass('active');
-                        });
-
-                        row.append(cell);
-                    }
-
-                    grid.append(row);
-                }
-            }
-
+        $(function () {
             buildGrid(6, 7, $('#grid'));
         });
         </script>
-
     </head>
+
     <body>
         <table id='grid'></table>
         <div id='location'></div>
