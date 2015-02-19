@@ -12,30 +12,30 @@
 
         <script type="text/javascript">
         $(function() {
-            var rows = 6,
-                cols = 7;
+            function buildGrid(rows, cols, grid) {
+                for (var i = 0; i < rows; i++) {
+                    var row = $('<tr></tr>');
 
-            for(var i = 0; i < rows; i++) {
-                var row = $('<tr></tr>');
+                    for (var j = 0; j < cols; j++) {
+                        var cell = $('<td></td>').data('row', i).data('col', j)
+                          .mouseover(function() {
+                            $(this).addClass('over');
+                            $('#location').text('row=' + $(this).data('row') + '; col=' + $(this).data('col'));
+                        }).mouseout(function() {
+                            $(this).removeClass('over');
+                            $('#location').text('');
+                        }).click(function() {
+                            $(this).toggleClass('active');
+                        });
 
-                for (var j = 0; j < cols; j++) {
-                    var cell = $('<td></td>').attr('data-row', i).attr('data-col', j);
+                        row.append(cell);
+                    }
 
-                    row.append(cell);
+                    grid.append(row);
                 }
-
-                $('#grid').append(row);
             }
 
-            $('table tr td').mouseover(function() {
-                $(this).addClass('over');
-                $('#location').text('row=' + $(this).data('row') + '; col=' + $(this).data('col'));
-            }).mouseout(function() {
-                $(this).removeClass('over');
-                $('#location').text('');
-            }).click(function() {
-                $(this).toggleClass('active');
-            });
+            buildGrid(6, 7, $('#grid'));
         });
         </script>
 
