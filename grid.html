@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>GRID</title>
+        <style type="text/css">
+            table tr td { width: 50px; height: 50px; background-color: silver; border: 1px solid black; }
+            table tr td.over { background-color: yellow; }
+            table tr td.active { background-color: red; }
+            .controls { padding: 20px; }
+        </style>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+        $(function() {
+            var rows = 6,
+                cols = 7;
+
+            for(var i = 0; i < rows; i++) {
+                var row = $('<tr></tr>');
+
+                for (var j = 0; j < cols; j++) {
+                    var cell = $('<td></td>').attr('data-row', i).attr('data-col', j);
+
+                    row.append(cell);
+                }
+
+                $('#grid').append(row);
+            }
+
+            $('table tr td').mouseover(function() {
+                $(this).addClass('over');
+                $('#location').text('row=' + $(this).data('row') + '; col=' + $(this).data('col'));
+            }).mouseout(function() {
+                $(this).removeClass('over');
+                $('#location').text('');
+            }).click(function() {
+                $(this).toggleClass('active');
+            });
+        });
+        </script>
+
+    </head>
+    <body>
+        <table id='grid'></table>
+        <div id='location'></div>
+    </body>
+</html>
